@@ -1,0 +1,50 @@
+.navbar-fixed-left {
+    width: 140px;
+    position: fixed;
+    border-radius: 0;
+    height: 100%;
+}
+
+.navbar-fixed-left .navbar-nav > li {
+    float: none;  /* Cancel default li float: left */
+    width: 139px;
+}
+
+.navbar-fixed-left + .container {
+    padding-left: 160px;
+}
+
+/* On using dropdown menu (To right shift popuped) */
+.navbar-fixed-left .navbar-nav > li > .dropdown-menu {
+    margin-top: -50px;
+    margin-left: 140px;
+}
+
+#navbarLeft {
+    margin-top: -20px;
+}
+
+.dropdown {
+    cursor: pointer;
+}
+
+#navbarLeft ul li{
+    display:  block;
+    float: left;
+    width: relative;
+}
+
+#navbarLeft ul ul {
+    display: none;
+}
+
+#navbarLeft ul li:hover > ul {
+    display: block;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 0px;
+}
+#navbarLeft ul ul li {
+    display: block;
+    float: none;
+}
