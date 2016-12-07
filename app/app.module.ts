@@ -17,6 +17,9 @@ import {RootService} from "./shared/root.service";
 import {CookieService} from "angular2-cookie/services/cookies.service";
 import {ProductsService} from "./shared/products.service";
 import {StartComponent} from "./start.component";
+import {Ng2PaginationModule} from "ng2-pagination";
+import {AuthAccessGuard} from "./shared/authAccess.guard";
+import {CategoriesService} from "./shared/categories.service";
 
 @NgModule({
   declarations: [
@@ -35,9 +38,10 @@ import {StartComponent} from "./start.component";
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-      routes
+      routes,
+      Ng2PaginationModule
   ],
-  providers: [UserService, RootService, CookieService, ProductsService],
+  providers: [UserService, RootService, CookieService, ProductsService, AuthAccessGuard, CategoriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

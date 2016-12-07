@@ -4,6 +4,7 @@ import {Http, Headers, Response} from "@angular/http";
 import 'rxjs/Rx';
 import {Observable} from "rxjs";
 import { Product } from "./product";
+import { NewProduct } from "./new-product";
 
 @Injectable()
 export class ProductsService {
@@ -23,6 +24,14 @@ export class ProductsService {
     const body = JSON.stringify(userId);
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.http.post(this.rootService.apiUrl + 'api/user_products/' + userId, body, {headers: headers}).
+        map((response: Response) => response.json()).
+        catch(this.handleError);
+  }
+
+  newProducts(data: NewProduct){
+    const body = JSON.stringify(data);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this.http.post(this.rootService.apiUrl + 'api/new_product/' + data, body, {headers: headers}).
         map((response: Response) => response.json()).
         catch(this.handleError);
   }

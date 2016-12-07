@@ -3,11 +3,12 @@ import {ProductsListComponent} from "./products-list/products-list.component";
 import {NewProductComponent} from "./new-product/new-product.component";
 import {RegisterLoginComponent} from "../user/register-login/register-login.component";
 import {StartComponent} from "../start.component";
+import {AuthAccessGuard} from "../shared/authAccess.guard";
 const MAIN_ROUTES : Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
     {path: 'home', component: StartComponent},
-    {path: 'productsList', component: ProductsListComponent},
-    {path: 'newProduct', component: NewProductComponent},
+    {path: 'productsList', component: ProductsListComponent, canActivate: [AuthAccessGuard]},
+    {path: 'newProduct', component: NewProductComponent, canActivate: [AuthAccessGuard]},
     {path: 'registerLogin', component: RegisterLoginComponent},
     {path: '**', redirectTo: '/home', pathMatch: 'full'}
 ];

@@ -53,6 +53,8 @@ export class RegisterLoginComponent implements OnInit {
         (data: UserData) => {
 
               if(data['id']){
+                // remove previus user cookies
+                this.cookieService.removeAll(),
                     console.log(data),
                         // check if remember check in login is checked
                           // add data to user or to cookies

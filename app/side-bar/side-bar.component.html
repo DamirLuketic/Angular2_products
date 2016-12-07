@@ -14,3 +14,19 @@
     <pr-main></pr-main>
   </div>
 </div>
+<div class="navbar navbar-inverse navbar-fixed-left" id="navbarLeft">
+  <a class="navbar-brand" style="cursor: pointer">Limango</a>
+  <ul class="nav navbar-nav" *ngIf="isUserLogin()">
+
+    <li style="cursor: pointer" ><a (click)="switchMenu()">Products
+      <span class="glyphicon glyphicon-triangle-bottom" *ngIf="!isMenuOpen" style="font-size: 75%"></span>
+      <span class="glyphicon glyphicon-triangle-top" *ngIf="isMenuOpen" style="font-size: 75%"></span></a></li>
+    <li><a [routerLink]="['/productsList']" *ngIf="isMenuOpen">Products list</a></li>
+    <li><a [routerLink]="['/newProduct']" *ngIf="isMenuOpen">New Products</a></li>
+  </ul>
+</div>
+<div class="container">
+  <div class="row">
+    <pr-main></pr-main>
+  </div>
+</div>

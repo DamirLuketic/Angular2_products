@@ -14,8 +14,7 @@ export class ProductsListComponent implements OnInit, DoCheck {
 
   public products: Product[] = null;
 
-  constructor(private cookieService: CookieService,
-              private userService: UserService,
+  constructor(private userService: UserService,
               private productsService: ProductsService
   ) { }
 
@@ -34,6 +33,6 @@ export class ProductsListComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-
   }
+
 }
