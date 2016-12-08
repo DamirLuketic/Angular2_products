@@ -9,7 +9,9 @@ import { NewProduct } from "./new-product";
 @Injectable()
 export class ProductsService {
 
-  public products: Product[] = null;
+  public products: Product[];
+
+  public searchTerm: string = null;
 
   constructor(
       private rootService: RootService,

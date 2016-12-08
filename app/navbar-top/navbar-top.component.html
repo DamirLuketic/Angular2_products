@@ -3,10 +3,8 @@
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <button class="btn btn-info" *ngIf="checkLogin()" [routerLink]="['/registerLogin']">Register\LogIn</button>
+        <button class="btn btn-info" *ngIf="!checkLogin()" (click)="logOut()">LogOut</button>
       </button>
       <img src="http://a3.mzstatic.com/eu/r30/Purple69/v4/85/5a/ce/855ace21-b3d4-13fc-d232-6a1772c07a83/icon175x175.png" alt="" height="50px" style="opacity: 0.7">
     </div>
@@ -14,12 +12,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <form class="navbar-form navbar-left" [hidden]="!isHidden()">
-            <!--[hidden]="isHidden()"-->
-
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" class="form-control" placeholder="Search" #searchValue (input)="searchTerm = $event.target.value">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <!--<button type="submit" class="btn btn-default" (click)="showInput()">Submit</button>-->
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" prdropdown>

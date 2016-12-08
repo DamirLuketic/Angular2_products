@@ -4,6 +4,7 @@ import {UserService} from "../../shared/user.service";
 import {ProductsService} from "../../shared/products.service";
 import {NewProduct} from "../../shared/new-product";
 import {CategoriesService} from "../../shared/categories.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'pr-new-product',

@@ -1,5 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
-import {CookieService} from "angular2-cookie/services/cookies.service";
+import {Component, OnInit, DoCheck} from '@angular/core';
 import {UserService} from "../../shared/user.service";
 import {ProductsService} from "../../shared/products.service";
 import {error} from "util";
@@ -12,11 +11,15 @@ import {Product} from "../../shared/product";
 })
 export class ProductsListComponent implements OnInit, DoCheck {
 
+  // import products
   public products: Product[] = null;
+
+  // meet the requirement
+  public termProducts;
 
   constructor(private userService: UserService,
               private productsService: ProductsService
-  ) { }
+  ) {}
 
   ngOnInit() {
 
@@ -32,7 +35,32 @@ export class ProductsListComponent implements OnInit, DoCheck {
     }
   }
 
+  // function for testin term
+  findMatch(name: string, term: string){
+    if(name.indexOf(term) !== -1){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   ngDoCheck() {
+
+    // put all products if no term
+    this.termProducts = this.products;
+
+    // if term exists
+    if(this.productsService.searchTerm != null){
+      // set products list to null
+      this.termProducts = [];
+
+              for(let product of this.products){
+        // if product meet the requirement
+            if(this.findMatch(product.name, this.productsService.searchTerm)){
+              this.termProducts.push(product);
+        }
+      }
+    }
   }
 
 }

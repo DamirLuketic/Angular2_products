@@ -1,7 +1,7 @@
 <p>
   products-list works!
 </p>
-<ul *ngFor="let p of products | paginate: { itemsPerPage: 5, currentPage: p }">
+<ul *ngFor="let p of termProducts | paginate: { itemsPerPage: 5, currentPage: p }">
   <li>{{p.name}}</li>
 </ul>
 <div class="containter" id="paginationControl">
