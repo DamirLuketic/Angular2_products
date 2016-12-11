@@ -16,7 +16,7 @@ Services for component and routes.
 
 Using HTTP Method for access and send data.
 
-Except basic data using POST method for data, and usage of object sending approach, instead of sending params.
+Except basic data, using POST method for data, and usage of object sending approach, instead of sending params.
 
 Usage of a native method for access REST API (DESTROY, PUT...).
 
