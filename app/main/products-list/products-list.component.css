@@ -1,9 +1,7 @@
-#paginationControl {
-    position: absolute;
-    right: 0;
-    bottom: 15rem;
-    left: 0;
-    padding: 1rem;
-    /*background-color: #efefef;*/
-    text-align: center;
+.buttonName {
+    width: 12rem;
+}
+
+.currentView {
+    background-color: orange;
 }

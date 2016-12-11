@@ -26,6 +26,16 @@ export class RegisterLoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  passwordLength(){
+    if(this.registerForm.value.password != null){
+      if(this.registerForm.value.password.length >= 6){
+        return true;
+      }else{
+        return false
+      }
+    }
+  }
+
   toLogin(){
     this.isLogin = true;
   }

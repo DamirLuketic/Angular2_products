@@ -11,7 +11,14 @@ export class ProductsService {
 
   public products: Product[];
 
+  public currentProduct: Product;
+
+  // d) usage for search engine
   public searchTerm: string = null;
+
+  public deletedProductsId: number[] = [];
+
+  public lastDeletedId: number;
 
   constructor(
       private rootService: RootService,
@@ -36,6 +43,20 @@ export class ProductsService {
     return this.http.post(this.rootService.apiUrl + 'api/new_product/' + data, body, {headers: headers}).
         map((response: Response) => response.json()).
         catch(this.handleError);
+  }
+
+  deleteProduct(productId: number){
+    return this.http.delete(this.rootService.apiUrl + 'api/products/' + productId).
+        map((response: Response) => response.json()).
+        catch(this.handleError);
+  }
+
+  editProduct(product: Product){
+      const body = JSON.stringify(product);
+      const headers = new Headers({'Content-Type': 'application/json'});
+      return this.http.put(this.rootService.apiUrl + 'api/products/' + product, body, {headers: headers}).
+          map((response: Response) => response.json()).
+          catch(this.handleError);
   }
 
 }

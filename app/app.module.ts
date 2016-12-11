@@ -20,6 +20,8 @@ import {StartComponent} from "./start.component";
 import {Ng2PaginationModule} from "ng2-pagination";
 import {AuthAccessGuard} from "./shared/authAccess.guard";
 import {CategoriesService} from "./shared/categories.service";
+import {ViewEditComponent} from "./main/view-edit/view-edit.component";
+import {ViewEditStartComponent} from "./main/view-edit-start.component";
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import {CategoriesService} from "./shared/categories.service";
       NewProductComponent,
       DropdownDirective,
       RegisterLoginComponent,
-      StartComponent
+      StartComponent,
+      ViewEditComponent,
+      ViewEditStartComponent
   ],
   imports: [
     BrowserModule,

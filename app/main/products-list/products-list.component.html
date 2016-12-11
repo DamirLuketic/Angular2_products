@@ -1,9 +1,21 @@
-<p>
-  products-list works!
-</p>
-<ul *ngFor="let p of termProducts | paginate: { itemsPerPage: 5, currentPage: p }">
-  <li>{{p.name}}</li>
-</ul>
-<div class="containter" id="paginationControl">
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+
+        <ul *ngFor="let product of termProducts | paginate: { itemsPerPage: 8, currentPage: p }">
+          <button class="btn btn-info buttonName" disabled="disabled">{{product.name}}</button>
+          <button class="btn btn-primary" [ngClass]="{currentView: currentViewId == product.id}" (click)="viewProduct(product)">View\Edit</button>
+          <button class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button>
+        </ul>
+
+        <br />
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+
+    <div class="col-lg-8">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
+
+

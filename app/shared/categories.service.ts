@@ -3,9 +3,12 @@ import {Http, Response} from "@angular/http";
 import {RootService} from "./root.service";
 import 'rxjs/Rx';
 import {Observable} from "rxjs";
+import { Category } from "./category";
 
 @Injectable()
 export class CategoriesService {
+
+  public categories: Category[] = null;
 
   constructor(private http: Http,
               private rootService: RootService

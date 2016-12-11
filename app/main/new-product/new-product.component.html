@@ -9,14 +9,13 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group row">
-            <input type="hidden" value="" formControlName="userId">
             <div class="col-md-5">
               <select name="cars" class="form-control" formControlName="categoryId">
                 <option *ngFor="let c of categories; let i = index" value="{{c.id}}">{{c.name}}</option>
               </select>
             </div>
             <div class="col-md-4"><input type="text" class="form-control" placeholder="name" formControlName="name"></div>
-            <div class="col-md-3"><input type="number" class="form-control" placeholder="value" formControlName="value" step="1"></div>
+            <div class="col-md-3"><input type="number" class="form-control" placeholder="value" formControlName="value" step="1" min="1"></div>
           </div>
         </div>
       </div>
@@ -24,7 +23,7 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group row">
-            <div class="col-md-3"><input type="number" class="form-control" placeholder="quantity" formControlName="quantity" step="1"></div>
+            <div class="col-md-3"><input type="number" class="form-control" placeholder="quantity" formControlName="quantity" step="1" min="1"></div>
             <div class="col-md-3">
               <select class="form-control" formControlName="onSale">
                 <option value="0">Not sale</option>
@@ -72,8 +71,8 @@
       <div class="row" id="submitControl">
         <div class="col-xs-12">
           <button type="submit" class="btn btn-success" [disabled]="!newProductForm.valid">Create</button>
-          <a class="btn btn-danger" (click)="onCancel()">Reset</a>
-          <a class="btn btn-danger" [routerLink]="['/home']">Cancel</a>
+          <a class="btn btn-danger" (click)="reset()">Reset</a>
+          <a class="btn btn-danger" [routerLink]="['productsList/viewEditStart']">Cancel</a>
         </div>
       </div>
 

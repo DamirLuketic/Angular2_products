@@ -1,0 +1,92 @@
+<div *ngIf="currentProduct.id != this.lastDeletedId">
+  <h3>{{currentProduct.name}}</h3>
+  <br />
+
+  <div class="row">
+    <div class="col-xs-12">
+      <form [formGroup]="editProductForm" (ngSubmit)="submitForm()">
+
+        <!-- basic item data -->
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group row">
+              <div class="col-md-5">
+                <select name="cars" class="form-control" formControlName="category_id">
+                  <option *ngFor="let c of categories; let i = index" value="{{c.id}}">{{c.name}}</option>
+                </select>
+              </div>
+              <div class="col-md-4"><input type="text" class="form-control" placeholder="name" formControlName="name"></div>
+              <div class="col-md-3"><input type="number" class="form-control" placeholder="value" formControlName="value" step="1" min="1"></div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group row">
+              <div class="col-md-3"><input type="number" class="form-control" placeholder="quantity" formControlName="quantity" step="1" min="1"></div>
+              <div class="col-md-3">
+                <select class="form-control" formControlName="on_sale">
+                  <option value="0">Not sale</option>
+                  <option value="1" selected>On sale</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group row">
+              <div class="col-md-12"><textarea class="form-control" placeholder="description (optional)" formControlName="description"></textarea></div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- leftover => for add image edit -->
+        <!-- data image -->
+        <!--<div class="row">-->
+        <!--<div class="col-xs-12">-->
+        <!--<div class="form-group">-->
+        <!--<label for="image-url">Image Url</label>-->
+        <!--<input-->
+        <!--type="text"-->
+        <!--id="image-url"-->
+        <!--class="form-control"-->
+        <!--placeholder="image url (optional)"-->
+        <!--[value]=imageUrl (input)="imageUrl = $event.target.value"-->
+        <!--formControlName="imageUrl"-->
+        <!--&gt;-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="row" style="width: 250px; height: 350px">-->
+        <!--<div class="col-xs-12">-->
+        <!--<div class="img">-->
+        <!--<img width="200" src="{{imageUrl}}" alt="image">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!-- submit & cancel -->
+
+        <div class="row" id="submitControl">
+          <div class="col-xs-12">
+            <button type="submit" class="btn btn-success" [disabled]="!editProductForm.valid">Update</button>
+            <!--<a class="btn btn-danger" (click)="reset()">Reset</a>-->
+            <a class="btn btn-danger" [routerLink]="['productsList/viewEditStart']">Cancel</a>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<p *ngIf="currentProduct.id == this.lastDeletedId">
+  {{currentProduct.name}} deleted
+</p>
+
+
+
