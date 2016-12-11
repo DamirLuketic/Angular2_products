@@ -1,24 +1,26 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {UserService} from "../../shared/user.service";
 import {ProductsService} from "../../shared/products.service";
 import {NewProduct} from "../../shared/new-product";
 import {CategoriesService} from "../../shared/categories.service";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {Category} from "../../shared/category";
 import {Router} from "@angular/router";
+import { CanLeave } from "../../shared/canLeave.guard";
 
 @Component({
   selector: 'pr-new-product',
   templateUrl: './new-product.component.html',
   styleUrls: ['./new-product.component.css']
 })
-export class NewProductComponent implements OnInit {
+export class NewProductComponent implements OnInit, CanLeave, OnDestroy {
 
   // default value for url
   public imageUrl: string = '';
 
   public categories: Category[];
+  private subscription: Subscription = null;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
@@ -29,7 +31,7 @@ export class NewProductComponent implements OnInit {
 
   ngOnInit() {
       if(this.categoryService.categories == null){
-          this.categoryService.productsCategories().subscribe(
+          this.subscription = this.categoryService.productsCategories().subscribe(
               (data: any) => {
                   console.log(data),
                       this.categoryService.categories = data,
@@ -72,6 +74,18 @@ export class NewProductComponent implements OnInit {
       this.newProductForm.reset();
   }
 
+    canLeave(){
+            if(this.newProductForm.dirty){
+                return confirm('Changes are not saved, do you want to leave?');
+            }else {
+                return true;
+            }
+    }
 
+    ngOnDestroy(){
+        if(this.subscription != null){
+            this.subscription.unsubscribe();
+        }
+    }
 
 }

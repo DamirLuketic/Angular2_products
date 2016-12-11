@@ -1,21 +1,23 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, OnDestroy } from '@angular/core';
 import {Product} from "../../shared/product";
 import {ProductsService} from "../../shared/products.service";
 import {Validators, FormBuilder, FormGroup} from "@angular/forms";
 import {Category} from "../../shared/category";
 import {CategoriesService} from "../../shared/categories.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'pr-view-edit',
   templateUrl: './view-edit.component.html',
   styleUrls: ['./view-edit.component.css']
 })
-export class ViewEditComponent implements OnInit, DoCheck {
+export class ViewEditComponent implements OnInit, DoCheck, OnDestroy {
 
   public currentProduct: Product;
   public lastDeletedId: number;
   public editProductForm: FormGroup;
   public categories: Category[];
+  private subscription: Subscription;
 
   constructor( private productsService: ProductsService,
                private formBuilder: FormBuilder,
@@ -27,7 +29,7 @@ export class ViewEditComponent implements OnInit, DoCheck {
     this.currentProduct = this.productsService.currentProduct;
 
     if(this.categoryService.categories == null){
-      this.categoryService.productsCategories().subscribe(
+      this.subscription = this.categoryService.productsCategories().subscribe(
           (data: any) => {
             console.log(data),
                 this.categoryService.categories = data,
@@ -100,6 +102,10 @@ export class ViewEditComponent implements OnInit, DoCheck {
     );
   }
 
-
+  ngOnDestroy(){
+    if(this.subscription.unsubscribe()){
+      this.subscription.unsubscribe();
+    }
+  }
 
 }

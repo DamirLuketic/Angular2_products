@@ -22,6 +22,7 @@ import {AuthAccessGuard} from "./shared/authAccess.guard";
 import {CategoriesService} from "./shared/categories.service";
 import {ViewEditComponent} from "./main/view-edit/view-edit.component";
 import {ViewEditStartComponent} from "./main/view-edit-start.component";
+import {CanLeaveGuard} from "./shared/canLeave.guard";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import {ViewEditStartComponent} from "./main/view-edit-start.component";
       routes,
       Ng2PaginationModule
   ],
-  providers: [UserService, RootService, CookieService, ProductsService, AuthAccessGuard, CategoriesService],
+  providers: [UserService, RootService, CookieService, ProductsService, AuthAccessGuard, CategoriesService, CanLeaveGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

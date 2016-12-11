@@ -1,16 +1,17 @@
-import {Component, OnInit, DoCheck} from '@angular/core';
+import {Component, OnInit, DoCheck, OnDestroy} from '@angular/core';
 import {UserService} from "../../shared/user.service";
 import {ProductsService} from "../../shared/products.service";
 import {error} from "util";
 import {Product} from "../../shared/product";
 import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'pr-products-list',
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.css']
 })
-export class ProductsListComponent implements OnInit, DoCheck {
+export class ProductsListComponent implements OnInit, DoCheck, OnDestroy {
 
   // import products
   public products: Product[] = null;
@@ -21,6 +22,9 @@ export class ProductsListComponent implements OnInit, DoCheck {
   // find current view product => for adding class on selector
   public currentViewId: number = 0;
 
+  private subscriptionUserProducts: Subscription = null;
+  private subscriptionDelete: Subscription = null;
+
   constructor(private userService: UserService,
               private productsService: ProductsService,
               private router: Router
@@ -28,7 +32,7 @@ export class ProductsListComponent implements OnInit, DoCheck {
 
   catchProducts(){
     if (this.userService.userData != null) {
-      this.productsService.userProducts(+this.userService.userData.id).subscribe(
+      this.subscriptionUserProducts = this.productsService.userProducts(+this.userService.userData.id).subscribe(
           (data: any) => {
             this.products = data,
                 this.productsService.products = data,
@@ -110,10 +114,20 @@ export class ProductsListComponent implements OnInit, DoCheck {
     // last deleted Id => use for removing view if current view product is deleted
     this.productsService.lastDeletedId = productId;
     console.log('Deleted products (by product id): ' + this.productsService.deletedProductsId);
-    this.productsService.deleteProduct(productId).subscribe(
+    this.subscriptionDelete = this.productsService.deleteProduct(productId).subscribe(
         (data: any) =>
             console.log(data),
             error => console.log(error)
     );
+  }
+
+  ngOnDestroy(){
+
+    if(this.subscriptionUserProducts != null){
+      this.subscriptionUserProducts.unsubscribe();
+    };
+    if(this.subscriptionDelete != null){
+      this.subscriptionDelete.unsubscribe();
+    }
   }
 }
