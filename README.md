@@ -1,6 +1,6 @@
 App content:
 
-Manipulate DOM without anytime refresh => two sync data managed system, for optimized using of a server.
+Manipulate DOM without any refresh => two sync data managed system, for optimized using of a server.
 
 Access data only once.
 
