@@ -103,7 +103,7 @@ export class ViewEditComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   ngOnDestroy(){
-    if(this.subscription.unsubscribe()){
+    if(this.subscription != null){
       this.subscription.unsubscribe();
     }
   }
